@@ -1,0 +1,64 @@
+[0m16:50:26.357278 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000029FE113AA10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000029FE0DC1550>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000029FE1138190>]}
+
+
+============================== 16:50:26.362644 | 9b983289-a9c0-44ce-936b-77a056096754 ==============================
+[0m16:50:26.362644 [info ] [MainThread]: Running with dbt=1.6.1
+[0m16:50:26.366775 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'debug': 'False', 'version_check': 'True', 'log_path': 'logs', 'fail_fast': 'False', 'profiles_dir': 'C:\\Users\\User\\.dbt', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'introspect': 'True', 'invocation_command': 'dbt init', 'static_parser': 'True', 'target_path': 'None', 'log_format': 'default', 'send_anonymous_usage_stats': 'True'}
+[0m16:50:31.894996 [error] [MainThread]: Encountered an error:
+
+[0m16:50:31.981834 [error] [MainThread]: Traceback (most recent call last):
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\dbt\cli\requires.py", line 87, in wrapper
+    result, success = func(*args, **kwargs)
+                      ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\dbt\cli\requires.py", line 72, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\dbt\cli\main.py", line 468, in init
+    results = task.run()
+              ^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\dbt\task\init.py", line 283, in run
+    project_name = self.get_valid_project_name()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\dbt\task\init.py", line 246, in get_valid_project_name
+    name = click.prompt("Enter a name for your project (letters, digits, underscore)")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\click\termui.py", line 164, in prompt
+    value = prompt_func(prompt)
+            ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\click\termui.py", line 147, in prompt_func
+    raise Abort() from None
+click.exceptions.Abort
+
+[0m16:50:32.006820 [debug] [MainThread]: Command `dbt init` failed at 16:50:32.005822 after 5.67 seconds
+[0m16:50:32.013031 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000029FE1168590>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000029FE0E7E410>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000029FDA6419D0>]}
+[0m16:50:32.017032 [debug] [MainThread]: Flushing usage events
+[0m16:50:44.606356 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001EEF9439BD0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001EEF9403090>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001EEF946C150>]}
+
+
+============================== 16:50:44.611386 | f196da85-d91d-474e-b489-8ee98c825bfc ==============================
+[0m16:50:44.611386 [info ] [MainThread]: Running with dbt=1.6.1
+[0m16:50:44.615668 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'fail_fast': 'False', 'debug': 'False', 'log_path': 'logs', 'profiles_dir': 'C:\\Users\\User\\.dbt', 'version_check': 'True', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'log_format': 'default', 'invocation_command': 'dbt init', 'introspect': 'True', 'static_parser': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'send_anonymous_usage_stats': 'True'}
+[0m16:50:53.947997 [debug] [MainThread]: Starter project path: C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\site-packages\dbt\include\starter_project
+[0m16:50:54.106659 [info ] [MainThread]: 
+Your new dbt project "PSI_singapore" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m16:50:54.111653 [info ] [MainThread]: Setting up your profile.
+[0m16:50:54.113650 [error] [MainThread]: Encountered an error:
+Runtime Error
+  No adapters available. Learn how to install an adapter by going to https://docs.getdbt.com/docs/connect-adapters#install-using-the-cli
+[0m16:50:54.117994 [debug] [MainThread]: Command `dbt init` failed at 16:50:54.116978 after 9.53 seconds
+[0m16:50:54.119168 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001EEF9402A90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001EEF9458610>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001EEF9458190>]}
+[0m16:50:54.120168 [debug] [MainThread]: Flushing usage events
