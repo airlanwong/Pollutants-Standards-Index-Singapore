@@ -7,28 +7,41 @@ import logging
 import boto3
 import configparser
 import pyarrow
+import redshift_connector
 
 URL = 'https://api.data.gov.sg/v1/environment/pm25'
 region_name = 'us-east-1'
 bucket_name = 'psi-sg'
 data_source_name = 'PSI'
 
+
+
 config = configparser.RawConfigParser()
 aws_credentials_path = '~/.aws/credentials'
 
 # insert the redshift credentials to fit to the testing
-redshift_cluster = ''
-redshift_host = ''
+redshift_cluster = 'de-project-alan'
+redshift_host = 'de-project-alan.cgub1bhr9ywh.us-east-1.redshift.amazonaws.com'
 redshift_port = 5439
-redshift_database = ''
-redshift_user = ''
-redshift_password = ''
-iam = ''
+redshift_database = 'dev'
+redshift_user = 'awsuser'
+redshift_password = '21J23e91'
 
 
 # Redshift table
 # insert the redshift table to fit to the testing
-table = ''
+table = 'sample'
+
+fd = open('ddl/table_exists.sql', 'r')
+table_exist_query = fd.read().replace('{table}',table)
+print(table_exist_query)
+fd.close()
+print(table_exist_query)
+
+fd1 = open('ddl/table_count_query.sql', 'r')
+table_count_query = fd1.read().replace('{table}',table)
+print(table_count_query)
+fd1.close()
 
 logging.basicConfig(level = logging.INFO)
 
@@ -56,6 +69,18 @@ def obtain_key(source_name):
     day = datetime.now().day
     key = f'year={year}/month={month}/day={day}/{source_name}_{datetime.now()}.parquet'
     return key
+
+def table_exists(cur, table_exist_query):
+    cur.execute(table_exist_query)
+    if cur.fetchone()[0]:
+        logging.info(f"The table '{table}' exists in Redshift.")
+    else:
+        logging.error(f"The table '{table}' does not exist in Redshift.")
+
+def count_row_table(cursor,query):
+    cursor.execute(query)
+    return int(cursor.fetchone()[0])
+
 def parameters():
     date_time = datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
     return {'date_time':date_time}
@@ -78,6 +103,15 @@ if __name__ == '__main__':
     s3_client = boto3.client('s3', aws_access_key_id=aws_access_key_id, 
                       aws_secret_access_key=aws_secret_access_key, 
                       region_name=region_name)
+    
+    conn = redshift_connector.connect(
+        host=redshift_host,
+        port=redshift_port,
+        database=redshift_database,
+        user=redshift_user,
+        password=redshift_password
+    )
+
     bucket_exist(s3_client,bucket_name)
     r = request(URL,parameters())
     content = r.json()
@@ -96,3 +130,8 @@ if __name__ == '__main__':
         Body=df_parquet,  
         ContentType='parquet'  
         )
+    
+    cur = conn.cursor()
+    table_exists(cur, table_exist_query)
+    pre_row_count = count_row_table(cur,table_count_query)
+    logging.info(f'{table} table has {pre_row_count} rows')
