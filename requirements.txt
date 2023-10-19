@@ -1,0 +1,10 @@
+pyarrow==11.0.0
+dbt-core==1.6.5
+dbt-extractor==0.4.1
+dbt-postgres==1.6.5
+dbt-redshift==1.6.2
+boto3==1.26.165
+botocore==1.29.165
+pandas==2.0.1
+redshift-connector==2.0.913
+requests==2.31.0
