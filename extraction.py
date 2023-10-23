@@ -30,7 +30,7 @@ redshift_password = '21J23e91'
 
 # Redshift table
 # insert the redshift table to fit to the testing
-table = 'sample'
+table = 'psi_table'
 
 fd = open('ddl/table_exists.sql', 'r')
 table_exist_query = fd.read().replace('{table}',table)
@@ -118,8 +118,9 @@ if __name__ == '__main__':
     data = get_body_reponse(content)
     # extracting data in json format
     df = pd.json_normalize(data)
-    print(df)
-    df_parquet = df.to_parquet(engine='pyarrow')
+    df_item = pd.json_normalize(df['items'][0])
+    print(df_item)
+    df_parquet = df_item.to_parquet(engine='pyarrow')
     s3_key_parquet = obtain_key(data_source_name)
 
 
@@ -135,3 +136,4 @@ if __name__ == '__main__':
     table_exists(cur, table_exist_query)
     pre_row_count = count_row_table(cur,table_count_query)
     logging.info(f'{table} table has {pre_row_count} rows')
+    
