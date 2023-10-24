@@ -9,10 +9,21 @@ import configparser
 import pyarrow
 import redshift_connector
 
-URL = 'https://api.data.gov.sg/v1/environment/pm25'
+URL = {
+    "PSI_URL":'https://api.data.gov.sg/v1/environment/pm25', 
+    "WEATHER_URL":'https://api.data.gov.sg/v1/environment/2-hour-weather-forecast'
+    }
+
+data_source_names = {"PSI_URL":'PSI',
+                    "WEATHER_URL": 'WEATHER'
+                    }
+
+
 region_name = 'us-east-1'
-bucket_name = 'psi-sg'
-data_source_name = 'PSI'
+bucket_names = {"PSI_URL":'psi-sg',
+               "WEATHER_URL":'weather-sg'
+               }
+
 
 
 
@@ -112,28 +123,30 @@ if __name__ == '__main__':
         password=redshift_password
     )
 
-    bucket_exist(s3_client,bucket_name)
-    r = request(URL,parameters())
-    content = r.json()
-    data = get_body_reponse(content)
-    # extracting data in json format
-    df = pd.json_normalize(data)
-    df_item = pd.json_normalize(df['items'][0])
-    print(df_item)
-    df_parquet = df_item.to_parquet(engine='pyarrow')
-    s3_key_parquet = obtain_key(data_source_name)
-
-
-    # Load to S3
-    s3_client.put_object(
-        Bucket=bucket_name,
-        Key=s3_key_parquet,
-        Body=df_parquet,  
-        ContentType='parquet'  
-        )
     
-    cur = conn.cursor()
-    table_exists(cur, table_exist_query)
-    pre_row_count = count_row_table(cur,table_count_query)
-    logging.info(f'{table} table has {pre_row_count} rows')
-    
+    final_df = pd.DataFrame()
+    for url_link in URL:
+        bucket_exist(s3_client,bucket_names[url_link])
+        r = request(URL[url_link],parameters())
+        content = r.json()
+        data = get_body_reponse(content)
+        # extracting data in json format
+        df = pd.json_normalize(data)
+        df_item = pd.json_normalize(df['items'][0])
+        df_parquet = df_item.to_parquet(engine='pyarrow')
+        s3_key_parquet = obtain_key(data_source_names[url_link])
+        print(s3_key_parquet)
+
+        # Load to S3
+        s3_client.put_object(
+            Bucket=bucket_names[url_link],
+            Key=s3_key_parquet,
+            Body=df_parquet,  
+            ContentType='parquet'  
+            )
+        
+        # cur = conn.cursor()
+        # table_exists(cur, table_exist_query)
+        # pre_row_count = count_row_table(cur,table_count_query)
+        # logging.info(f'{table} table has {pre_row_count} rows')
+        
