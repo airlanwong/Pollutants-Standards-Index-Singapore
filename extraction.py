@@ -25,7 +25,7 @@ redshift_host = 'de-project-alan.cgub1bhr9ywh.us-east-1.redshift.amazonaws.com'
 redshift_port = 5439
 redshift_database = 'dev'
 redshift_user = 'awsuser'
-redshift_password = ''
+redshift_password = '21J23e91'
 
 
 # Redshift table
