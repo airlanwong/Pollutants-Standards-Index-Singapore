@@ -10,3 +10,4 @@ The public S3 bucket is s3://psi-sg/
 Future direction:
 - Implementation of IAC AWS Cloudformation
 - containerisation Docker
+- Add fastAPI as the endpoint
