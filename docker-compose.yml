@@ -1,0 +1,11 @@
+version: "3"
+services:
+  spark:
+    build: Spark/.
+    networks:
+      - dbnet
+    ports:
+      - "8888:8888"
+      - "4040-4049:4040-4049"
+networks:
+  dbnet:
