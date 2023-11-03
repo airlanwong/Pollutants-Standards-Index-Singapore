@@ -145,8 +145,8 @@ if __name__ == '__main__':
             ContentType='parquet'  
             )
         
-        # cur = conn.cursor()
-        # table_exists(cur, table_exist_query)
-        # pre_row_count = count_row_table(cur,table_count_query)
-        # logging.info(f'{table} table has {pre_row_count} rows')
+        cur = conn.cursor()
+        table_exists(cur, table_exist_query)
+        pre_row_count = count_row_table(cur,table_count_query)
+        logging.info(f'{table} table has {pre_row_count} rows')
         
