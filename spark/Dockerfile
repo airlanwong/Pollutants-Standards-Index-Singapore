@@ -7,6 +7,8 @@ WORKDIR /opt/spark
 RUN pip install --upgrade pip
 
 COPY  requirements.txt .
+COPY ETL_script.py .
+
 RUN pip3 install -r requirements.txt
 
 CMD jupyter-lab --allow-root --no-browser --ip=0.0.0.0
