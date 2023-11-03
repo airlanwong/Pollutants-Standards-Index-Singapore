@@ -8,6 +8,7 @@ RUN pip install --upgrade pip
 
 COPY  requirements.txt .
 COPY ETL_script.py .
+COPY script.ipynb .
 
 RUN pip3 install -r requirements.txt
 
