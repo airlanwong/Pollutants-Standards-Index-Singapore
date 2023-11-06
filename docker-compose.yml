@@ -7,5 +7,12 @@ services:
     ports:
       - "8888:8888"
       - "4040-4049:4040-4049"
+  dbt:
+    build: dbt/.
+    image: dbt-dummy
+    volumes:
+      - ./dbt/psi/.:/usr/src/dbt
+    networks:
+      - dbnet      
 networks:
   dbnet:

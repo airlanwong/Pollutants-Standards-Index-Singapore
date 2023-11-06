@@ -1,0 +1,11 @@
+psi:
+  outputs:
+    dev:
+      account: 'odyihvl-oz59812'
+      database: 'PSI'
+      password: '21J23e91'
+      schema: 'public'
+      threads: 1
+      type: snowflake
+      user: 'airlanwong'
+  target: dev

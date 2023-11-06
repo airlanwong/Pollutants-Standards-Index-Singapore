@@ -1,0 +1,42 @@
+
+version: 2
+
+# models:
+#   - name: psi_table
+#     description: "A starter dbt model"
+#     columns:
+#       - name: fact_guid
+#         description: "The primary key for this table"
+#         tests:
+#           - unique
+#           - not_null
+#       - name: pm_west
+#         description: "pm_west testing"
+#         tests:
+#           - dbt_utils.expression_is_true:
+#               expression: "> 0"
+#           - not_null
+#       - name: pm_east
+#         description: "pm_east testing"
+#         tests:
+#           - dbt_utils.expression_is_true:
+#               expression: "> 0"
+#           - not_null
+#       - name: pm_central
+#         description: "pm_central testing"
+#         tests:
+#           - dbt_utils.expression_is_true:
+#               expression: "> 0"
+#           - not_null
+#       - name: pm_south
+#         description: "pm_south testing"
+#         tests:
+#           - dbt_utils.expression_is_true:
+#               expression: "> 0"
+#           - not_null
+#       - name: pm_north
+#         description: "pm_north testing"
+#         tests:
+#           - dbt_utils.expression_is_true:
+#               expression: "> 0"
+#           - not_null
